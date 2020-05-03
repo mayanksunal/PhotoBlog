@@ -79,7 +79,7 @@ router.post("/register", upload.single("image"), function(req, res) {
         });
       }
       passport.authenticate("local")(req, res, function() {
-        res.redirect("/about");
+        res.redirect("/gallery");
       });
     });
   } else {
