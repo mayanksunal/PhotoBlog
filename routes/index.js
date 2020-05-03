@@ -28,8 +28,8 @@ var upload = multer({
 var cloudinary = require('cloudinary');
 cloudinary.config({ 
   cloud_name: 'dr81np8zr', 
-   api_key: process.env.API_KEY, 
-  api_secret: process.env.API_SECRET
+  api_key: "333537181451896", 
+  api_secret: "J030KUG3VKYzvVauTSYmDclOHdo"
 });
 
 /////Initial Routes/////
