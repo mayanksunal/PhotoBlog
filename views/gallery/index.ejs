@@ -1,0 +1,75 @@
+<%- include('../partials/header'); -%>
+
+<header class="jumbotron text-light rounded-0 d-none d-md-block">                         
+    <div class="container ">
+      <div class="jumbotron-text mt-5 text-center">
+          <h1 class="display-3 jumbotronText">Welcome to PhotoBlog!</h1>
+          <p class="lead jumbotronText">View Images from all over the world</p>
+        
+      </div>
+    </div>
+  </header>
+  <nav id="searchNav" class="navbar navbar-expand navbar-light bg-white shadow-sm" >
+    <div class="container">
+      <div class="collapse navbar-collapse">
+        <div class="d-none d-md-block">
+          <form action="/gallery" method="GET" class="input-group" >
+            <input type="text" class="form-control" type="text" name="search" placeholder="Search Gallery..." aria-label="Search" style="margin-left: 880px;">
+            <div class="input-group-append">
+              <button class="btn btn-danger border-0" type="submit">
+                    <i class="fa fa-search"></i>
+                  </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div id="galleryHome" class="container ">
+    <div class="d-block d-none d-md-none">
+      <form action="/gallery" method="GET" class="input-group shadow-sm mt-3">
+        <input type="text" class="form-control border-0" type="text" name="search" placeholder="Search Gallery..." aria-label="Search">
+        <div class="input-group-append">
+          <button class="btn btn-danger border-0" type="submit">
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="jumbotron-text text-center mt-3  d-block d-sm-none d-none d-sm-block d-md-none">
+    </div>
+    <div class="row">
+      <% gallery.forEach(function(gallery) { %>
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          <div class="card indexCards shadow border-0 mt-4">
+            <a href="/gallery/<%= gallery._id %>"><img id="galleryCard" class="card-img-top" src="<%= gallery.image %>"></a>
+            <div class="card-body">
+              <h5 class="card-title text-capitalize">
+                <a href="/gallery/<%= gallery._id %>"><%= gallery.name %></a>
+              </h5>
+              <h6 class="card-subtitle">
+                <% if(gallery.comments.length === 0) { %>
+                  <span class="text-muted">No Reviews</span>
+                <% } else { %>
+                  <% var stars = ['<i class="far fa-star text-danger "></i>', '<i class="far fa-star text-danger "></i>', '<i class="far fa-star text-danger "></i>', '<i class="far fa-star text-danger "></i>', '<i class="far fa-star text-danger "></i>'] %>
+                  <% for(var i = 0; i < Math.round(gallery.rateAvg); i++) { %>
+                      <% stars[i] = '<i class="fas fa-star text-danger "></i>' %>
+                  <% } %>
+                  <% for(var i = 0; i < stars.length; i++) { %>
+                    <%- stars[i] %>
+                  <% } %>
+                  <% if (gallery.comments.length === 1) { %>
+                    <span class="text-muted"><%= gallery.comments.length %> Review</span>
+                  <% } else { %>
+                    <span class="text-muted"><%= gallery.comments.length %> Reviews</span>
+                  <% } %>
+                <% } %>
+              </h6>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+    </div>
+  </div>
+<%- include('../partials/footer'); -%>
