@@ -79,7 +79,7 @@ router.post("/register", upload.single("image"), function(req, res) {
         });
       }
       passport.authenticate("local")(req, res, function() {
-        res.redirect("/gallery");
+        res.redirect("/about");
       });
     });
   } else {
@@ -92,6 +92,7 @@ router.post("/register", upload.single("image"), function(req, res) {
       },
       function(err, result) {
         if (err) {
+          console.log(err);
           req.flash("error", err.messsage);
           return res.redirect("back");
         }
@@ -106,6 +107,7 @@ router.post("/register", upload.single("image"), function(req, res) {
         });
         User.register(newUser, req.body.password, function(err, user) {
           if (err) {
+            console.log("the error is====z"+err);
             return res.render("register", {
               error: err.message
             });

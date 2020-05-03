@@ -35,7 +35,7 @@ var User          =   require("./models/user");
 
 
 //////MONGOOSE setup//////
-var mongoURI   =  "mongodb://localhost/gallery";
+  var mongoURI   =   'mongodb+srv://mayank:mass@cluster0-4ojfu.mongodb.net/test?retryWrites=true&w=majority';
 
 mongoose.connect(mongoURI,{
     useNewUrlParser: true, 
@@ -90,7 +90,7 @@ app.use("/gallery/:id/comments/",commentRoutes);
 
 
 // connecting on port 2900
-app.listen(2900,function(){
+app.listen(process.env.PORT || 2900,function(){
 
     console.log("server has started");
 
