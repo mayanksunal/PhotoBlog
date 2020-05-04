@@ -174,6 +174,7 @@ middleware.checkProfileOwnership,
 function(req, res) {
 User.findById(req.params.user_id, async function(err, user) {
  if (err) {
+   console.log("1 error");
    req.flash("error", err.message);
  } else {
    if (req.file) {
@@ -185,6 +186,8 @@ User.findById(req.params.user_id, async function(err, user) {
        user.imageId = result.public_id;
        user.image = result.secure_url;
      } catch (err) {
+   console.log("2 error");
+
        req.flash("error", err.message);
        return res.redirect("back");
      }
